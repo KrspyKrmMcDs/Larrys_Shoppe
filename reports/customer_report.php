@@ -16,14 +16,13 @@ include "../db_connect.php";
 
 	<br><br>
 	<h1>Customer Report</h1>
+
 	<?php
-	$query = "SELECT *, CONCAT(first_name, ' ', last_name)
-	AS Name  FROM customers;";
-	$query2 = "SELECT *, CONCAT(street, ', ', city, ', ', state, ' ', zip) AS Address FROM customers;";
+	$query = "SELECT cust_id, date, CONCAT(first_name, ' ', last_name) AS Name, CONCAT(street, ', ', city, ', ', state, ', ', zip) AS Address, phone, email from customers;";
 	mysqli_query($db_connection, $query) or die('Error querying database.');
 	$result = mysqli_query($db_connection, $query);
-	$result2 = mysqli_query($db_connection, $query2);
 	?>
+	
 	<table id="inv_report">
 		<tr>
 			<th>Customer ID</th>
@@ -37,12 +36,11 @@ include "../db_connect.php";
 	<?php
 	
 	while ($row = mysqli_fetch_array($result)) {
-		$row2 = mysqli_fetch_array($result2);
 		echo "<tr>";
 		echo "<td>".$row['cust_id']."</td>";
 		echo "<td>".$row['date']."</td>";
 		echo "<td>".$row['Name']."</td>";
-		echo "<td>".$row2['Address']."</td>";
+		echo "<td>".$row['Address']."</td>";
 		echo "<td>".$row['phone']."</td>";
 		echo "<td>".$row['email']."</td>";
 	}

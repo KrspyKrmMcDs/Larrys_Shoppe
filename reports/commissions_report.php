@@ -18,6 +18,7 @@ include "../db_connect.php";
 	<h1>Monthly Commissions Report</h1>
 	<?php
 
+	// Inner join selects data from sales and employees tables
 	$query = "SELECT employees.emp_id, CONCAT(employees.first_name, ' ', employees.last_name) AS Name, SUM(total*.10) as Commission 
 				FROM sales 
 				INNER JOIN employees ON sales.emp_id=employees.emp_id 

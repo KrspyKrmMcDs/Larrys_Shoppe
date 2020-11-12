@@ -20,7 +20,8 @@ include "../db_connect.php";
 	
 	// Outer join selects data from the sales, employees, customers, and inventory tables
 	$query = "SELECT s.transaction_id, s.date, CONCAT(e.first_name, ' ', e.last_name) AS Employee, CONCAT(c.first_name, ' ', c.last_name) AS Customer, i.item_id, i.description AS Description, s.quantity AS Quantity, s.price AS Price, s.total AS Total 
-				FROM sales AS s LEFT JOIN customers AS c ON s.cust_id=c.cust_id 
+				FROM sales AS s 
+				LEFT JOIN customers AS c ON s.cust_id=c.cust_id 
 				LEFT JOIN inventory AS i ON s.item_id=i.item_id 
 				LEFT JOIN employees AS e ON s.emp_id=e.emp_id 
 				WHERE YEAR(s.date)=YEAR(NOW());";
